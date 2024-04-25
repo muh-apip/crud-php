@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2024 at 01:04 PM
+-- Generation Time: Apr 25, 2024 at 04:44 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -109,7 +109,9 @@ INSERT INTO `matakuliah` (`kode_mk`, `nama`, `jumlah_sks`) VALUES
 -- Indexes for table `krs`
 --
 ALTER TABLE `krs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_mahasiswa_npm` (`mahasiswa_npm`),
+  ADD KEY `fk_matakuliah_kodemk` (`matakuliah_kodemk`);
 
 --
 -- Indexes for table `mahasiswa`
@@ -132,6 +134,17 @@ ALTER TABLE `matakuliah`
 --
 ALTER TABLE `krs`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1112;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `krs`
+--
+ALTER TABLE `krs`
+  ADD CONSTRAINT `fk_mahasiswa_npm` FOREIGN KEY (`mahasiswa_npm`) REFERENCES `mahasiswa` (`npm`),
+  ADD CONSTRAINT `fk_matakuliah_kodemk` FOREIGN KEY (`matakuliah_kodemk`) REFERENCES `matakuliah` (`kode_mk`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
